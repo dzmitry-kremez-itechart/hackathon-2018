@@ -14,7 +14,6 @@ class GraphqlController < ApplicationController
   private
 
   def current_user
-    binding.pry
     return nil if request.headers['Authorization'].blank?
     token = request.headers['Authorization'].split(' ').last
     return nil if token.blank?
