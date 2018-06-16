@@ -23,7 +23,7 @@ export const SET_USER_VERIFIED_ACTION = "SET_USER_VERIFIED_ACTION";
 export const SET_USER_VERIFIED_ERROR_ACTION = "SET_USER_VERIFIED_ERROR_ACTION";
 
 // url
-export const URL = "https://fredit-app.herokuapp.com/graphiql";
+export const URL = "https://fredit-app.herokuapp.com";
 
 export const SETTING_ITEMS = {
   creditCard: "credit-card",
