@@ -6,6 +6,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import LoanContractScreen from "../screens/LoanContractScreen";
 import MyContractsScreen from "../screens/MyContractsScreen";
 import SettingsScreen from "../screens/SettingsScreen";
+import CreditCardScreen from "../screens/CreditCardScreen";
 
 // constants
 import {
@@ -25,7 +26,7 @@ export default createBottomTabNavigator(
       navigationOptions: () => ({
         tabBarIcon: ({ focused }) => (
           <Icon
-            name="credit-card"
+            name="monetization-on"
             color={COLORS.primary}
             size={focused ? 32 : 24}
           />
@@ -38,6 +39,18 @@ export default createBottomTabNavigator(
         tabBarIcon: ({ focused }) => (
           <Icon
             name="view-list"
+            color={COLORS.primary}
+            size={focused ? 32 : 24}
+          />
+        )
+      })
+    },
+    [CREDIT_CARD_SCREEN]: {
+      screen: props => <CreditCardScreen {...props} />,
+      navigationOptions: () => ({
+        tabBarIcon: ({ focused }) => (
+          <Icon
+            name="credit-card"
             color={COLORS.primary}
             size={focused ? 32 : 24}
           />
