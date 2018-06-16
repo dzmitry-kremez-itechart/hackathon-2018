@@ -8,7 +8,7 @@
 #  number         :string
 #  identification :string
 #  nationality    :string
-#  place_of_birth :date
+#  place_of_birth :string
 #  date_of_birth  :date
 #  date_of_issue  :date
 #  date_of_expire :date
