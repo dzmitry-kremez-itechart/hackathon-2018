@@ -16,6 +16,12 @@ export default class WelcomeScreen extends React.Component {
   scrollNext = () => {
     this.swiper.scrollBy(1);
   };
+  
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.token && nextProps.token) {
+      this.swiper.scrollBy(1);
+    }
+  }
 
   setCode = code => this.setState({ code });
   setPhoneNumber = phoneNumber => this.setState({ phoneNumber });
@@ -51,7 +57,7 @@ export default class WelcomeScreen extends React.Component {
         />
         <View style={{ height: 16 }} />
         <Button
-          onPress={this.scrollNext}
+          onPress={() => this.props.onSubmitPhoneNumber(this.state.phoneNumber)}
           text="request code"
           textColor={COLORS.background}
           color={COLORS.primary}
