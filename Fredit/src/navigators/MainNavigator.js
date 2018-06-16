@@ -1,26 +1,24 @@
 import * as React from "react";
-import { Text, View } from "react-native";
 import { createBottomTabNavigator } from "react-navigation";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+// screens
+import LoanContractScreen from "../screens/LoanContractScreen";
+import MyContractsScreen from "../screens/MyContractsScreen";
+import SettingsScreen from "../screens/SettingsScreen";
+
 // constants
 import {
-  NEW_TRANSACTION_SCREEN,
-  TRANSACTIONS_SCREEN,
+  LOAN_CONTRACT_SCREEN,
+  MY_CONTRACTS_SCREEN,
   SETTINGS_SCREEN,
   COLORS
 } from "../utils/constants";
 
 export default createBottomTabNavigator(
   {
-    [NEW_TRANSACTION_SCREEN]: {
-      screen: () => (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <Text>New Transaction</Text>
-        </View>
-      ),
+    [LOAN_CONTRACT_SCREEN]: {
+      screen: props => <LoanContractScreen {...props} />,
       navigationOptions: () => ({
         tabBarIcon: ({ focused }) => (
           <Icon
@@ -31,14 +29,8 @@ export default createBottomTabNavigator(
         )
       })
     },
-    [TRANSACTIONS_SCREEN]: {
-      screen: () => (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <Text>Transactions</Text>
-        </View>
-      ),
+    [MY_CONTRACTS_SCREEN]: {
+      screen: props => <MyContractsScreen {...props} />,
       navigationOptions: () => ({
         tabBarIcon: ({ focused }) => (
           <Icon
@@ -50,13 +42,7 @@ export default createBottomTabNavigator(
       })
     },
     [SETTINGS_SCREEN]: {
-      screen: () => (
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <Text>Settings</Text>
-        </View>
-      ),
+      screen: props => <SettingsScreen {...props} />,
       navigationOptions: () => ({
         tabBarIcon: ({ focused }) => (
           <Icon

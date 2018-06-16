@@ -1,5 +1,6 @@
 import * as React from "react";
 import { createStackNavigator } from "react-navigation";
+
 import { connect } from 'react-redux';
 import { createUser, verifySMSCode } from '../redux/actions/appActions';
 // navigators
@@ -7,9 +8,16 @@ import MainNavigator from "./MainNavigator";
 
 // screens
 import WelcomeScreen from "../screens/WelcomeScreen";
+import CreditCardScreen from "../screens/CreditCardScreen";
+import PassportScreen from "../screens/PassportScreen";
 
 // constants
-import { WELCOME_SCREEN, MAIN_SCREEN } from "../utils/constants";
+import {
+  WELCOME_SCREEN,
+  MAIN_NAVIGATOR,
+  CREDIT_CARD_SCREEN,
+  PASSPORT_SCREEN
+} from "../utils/constants";
 
 export default createStackNavigator(
   {
@@ -27,12 +35,20 @@ export default createStackNavigator(
       }))((props) => (
         <WelcomeScreen
           {...props}
-          openMain={() => props.navigation.navigate({ routeName: MAIN_SCREEN })}
+          openMain={() =>
+            props.navigation.navigate({ routeName: MAIN_NAVIGATOR })
+          }
         />
       ))
     },
-    [MAIN_SCREEN]: {
+    [MAIN_NAVIGATOR]: {
       screen: MainNavigator
+    },
+    [CREDIT_CARD_SCREEN]: {
+      screen: props => <CreditCardScreen {...props} />
+    },
+    [PASSPORT_SCREEN]: {
+      screen: props => <PassportScreen {...props} />
     }
   },
   { headerMode: "none" }
