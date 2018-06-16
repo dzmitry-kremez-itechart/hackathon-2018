@@ -1,4 +1,4 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
+import { AppRegistry } from "react-native";
+import App from "./src/navigators/AppNavigator";
 
-AppRegistry.registerComponent('Fredit', () => App);
+AppRegistry.registerComponent("Fredit", () => App);

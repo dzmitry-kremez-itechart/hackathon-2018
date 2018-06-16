@@ -10,6 +10,8 @@
 #  time_period_type :integer          default("week"), not null
 #  issued_amount    :integer          default(0), not null
 #  return_amount    :integer          default(0), not null
+#  request_status   :integer          default("issued"), not null
+#  state            :integer          default("pending"), not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #

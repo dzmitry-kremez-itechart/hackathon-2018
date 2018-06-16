@@ -1,6 +1,4 @@
 class Types::PassportType < Types::BaseObject
-  graphql_name 'Passport'
-
   field :id, ID, null: false
   field :first_name, String, null: true
   field :last_name, String, null: true

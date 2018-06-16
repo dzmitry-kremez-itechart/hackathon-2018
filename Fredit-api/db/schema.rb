@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 2018_06_16_133007) do
     t.string "number"
     t.string "identification"
     t.string "nationality"
-    t.date "place_of_birth"
+    t.string "place_of_birth"
     t.date "date_of_birth"
     t.date "date_of_issue"
     t.date "date_of_expire"
