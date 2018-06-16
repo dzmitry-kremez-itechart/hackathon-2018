@@ -13,3 +13,7 @@ export const COLORS = {
   accent: "",
   primaryDisabled: "#E1BEE7"
 };
+
+// constants
+export const SET_LOGGED_IN_ACTION = "SET_LOGGED_IN_ACTION";
+export const SET_TOKEN_ACTION = "SET_TOKEN_ACTION";
