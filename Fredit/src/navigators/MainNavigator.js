@@ -18,7 +18,7 @@ import {
   CREDIT_CARD_SCREEN,
   PASSPORT_SCREEN,
   COLORS,
-  SETTING_ITEMS,
+  SETTING_ITEMS
 } from "../utils/constants";
 
 export default createBottomTabNavigator(
@@ -67,13 +67,13 @@ export default createBottomTabNavigator(
       })
     },
     [SETTINGS_SCREEN]: {
-      screen: props =>
+      screen: props => (
         <SettingsScreen
           {...props}
-          onItemPress={(item) => {
+          onItemPress={item => {
             let routeName;
 
-            switch(item) {
+            switch (item) {
               case SETTING_ITEMS.creditCard:
                 routeName = CREDIT_CARD_SCREEN;
                 break;
@@ -83,9 +83,9 @@ export default createBottomTabNavigator(
             }
 
             return props.navigation.navigate({ routeName });
-          }
-        }
-        />,
+          }}
+        />
+      ),
       navigationOptions: () => ({
         tabBarIcon: ({ focused }) => (
           <Icon
