@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  creditor_id      :integer
 #  debtor_id        :integer
-#  start_date       :datetime         not null
+#  start_date       :datetime
 #  time_period      :integer          default(0), not null
 #  time_period_type :integer          default("week"), not null
 #  issued_amount    :integer          default(0), not null

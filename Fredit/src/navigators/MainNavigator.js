@@ -1,5 +1,5 @@
 import * as React from "react";
-import { createBottomTabNavigator } from "react-navigation";
+import { createBottomTabNavigator, Navigation } from "react-navigation";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 // screens
@@ -46,7 +46,10 @@ export default createBottomTabNavigator(
       })
     },
     [CREDIT_CARD_SCREEN]: {
-      screen: props => <CreditCardScreen {...props} />,
+      screen: props => <CreditCardScreen
+        {...props}
+        creditCards={[]}
+      />,
       navigationOptions: () => ({
         tabBarIcon: ({ focused }) => (
           <Icon

@@ -6,8 +6,8 @@
 #  user_id         :integer
 #  main_card       :boolean          not null
 #  number          :string
-#  expiration_date :date
-#  cvc             :integer
+#  expiration_date :string
+#  cvc             :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
