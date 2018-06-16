@@ -8,6 +8,8 @@
 #  status     :integer          default("debtor"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  authy_id   :string
+#  verified   :boolean          default(FALSE), not null
 #
 
 class User < ApplicationRecord
@@ -18,5 +20,5 @@ class User < ApplicationRecord
 
   enum status: [:debtor, :creditor]
 
-  validates :phone, presence: true
+  validates :phone, presence: true, uniqueness: true
 end
