@@ -7,18 +7,40 @@ import Button from '../../components/Button';
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 export default class CreditCardScreen extends React.Component {
-  state = { newCreditCardVisible: false };
+  state = { newCreditCardVisible: false, creditCard: { valid: false } };
+
+  setCreditCard = (form) => {
+    this.setState({
+      creditCard: {
+        expiration_date: form.values.expiry,
+        cvc: form.values.cvc,
+        number: form.values.number.replace(/ /g, ''),
+        valid: form.valid
+      },
+    });
+  };
+  
+  onCreateCreditCard = () => {
+    this.props.onSubmitCreditCard(this.state.creditCard);
+    this.setState({ newCreditCardVisible: false });
+  }
 
   renderNewCreditCardForm = () =>
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center", margin: 20 }}>
-      <CreditCardInput />
+      <CreditCardInput onChange={this.setCreditCard} />
       <View style={{ marginTop: -150}}>
         <Button
           text="Add Credit Card"
           textColor={COLORS.background}
           color={COLORS.primary}
+          disabled={!this.state.creditCard.valid}
+          onPress={this.onCreateCreditCard}
         />
-        <TouchableOpacity style={{ marginTop: 10, marginLeft: 70}} onPress={() => this.setState({newCreditCardVisible: false})}>
+        <TouchableOpacity
+          style={{ marginTop: 10, marginLeft: 70}}
+          onPress={() => this.setState({newCreditCardVisible: false})}
+          disabled={this.state.creditCard.valid}
+        >
           <View style={{ alignContent: 'center', justifyContent: "center"}}>
             <Text style={{ fontStyle: 'italic', fontSize: 15, color: COLORS.primary}}>Return to lists</Text>
           </View>
