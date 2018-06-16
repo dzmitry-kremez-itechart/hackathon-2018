@@ -1,10 +1,13 @@
 import * as React from "react";
 import { AppRegistry } from "react-native";
 import { createStore, applyMiddleware } from "redux";
-import thunk from 'redux-thunk';
-import storage from "redux-persist/lib/storage";
-
+import thunk from "redux-thunk";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
 import { Provider } from "react-redux";
+
+// constants
+import { URL } from "./src/utils/constants";
 
 //reducers
 import rootReducer from "./src/redux/reducers/rootReducer";
@@ -12,22 +15,20 @@ import rootReducer from "./src/redux/reducers/rootReducer";
 // navigators
 import App from "./src/navigators/AppNavigator";
 
-const persistConfig = {
-  key: "root",
-  storage
-};
+const client = new ApolloClient({
+  uri: `${URL}/graphql`
+});
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk)
-);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 class AppWithRedux extends React.Component {
   render() {
     return (
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ApolloProvider>
     );
   }
 }

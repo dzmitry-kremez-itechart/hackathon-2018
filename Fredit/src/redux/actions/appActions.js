@@ -2,7 +2,8 @@ import {
   SET_TOKEN_ACTION,
   SET_LOGGED_IN_ACTION,
   SET_USER_VERIFIED_ACTION,
-  SET_USER_VERIFIED_ERROR_ACTION
+  SET_USER_VERIFIED_ERROR_ACTION,
+  URL
 } from "../../utils/constants";
 
 export function setToken(token) {
@@ -34,18 +35,18 @@ export function setUserVerifiedError(error) {
 }
 
 export function createUser(phoneNumber) {
-  return async (dispatch) => {
-    const response = await fetch('http://localhost:3000/users', {
-      method: 'POST',
+  return async dispatch => {
+    const response = await fetch(`${URL}/users`, {
+      method: "POST",
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         user: {
-          phone: phoneNumber,
-        },
-      }),
+          phone: phoneNumber
+        }
+      })
     });
 
     const responseJson = await response.json();
@@ -57,16 +58,16 @@ export function verifySMSCode(code) {
   return async (dispatch, getState) => {
     const token = getState().appReducer.token;
 
-    const response = await fetch('http://localhost:3000/users/verify', {
-      method: 'POST',
+    const response = await fetch(`${URL}/users/verify`, {
+      method: "POST",
       headers: {
-        Accept: 'application/json',
+        Accept: "application/json",
         Authorization: `bearer ${token}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        token: code,
-      }),
+        token: code
+      })
     });
 
     const responseJson = await response.json();
