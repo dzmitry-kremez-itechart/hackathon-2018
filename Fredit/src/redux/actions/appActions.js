@@ -6,6 +6,8 @@ import {
   URL
 } from "../../utils/constants";
 
+import { AsyncStorage } from "react-native";
+
 export function setToken(token) {
   return {
     type: SET_TOKEN_ACTION,
@@ -50,6 +52,9 @@ export function createUser(phoneNumber) {
     });
 
     const responseJson = await response.json();
+
+    await AsyncStorage.setItem("TOKEN", responseJson.token);
+
     return dispatch(setToken(responseJson.token));
   };
 }
