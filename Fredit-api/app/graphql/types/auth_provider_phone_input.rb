@@ -1,6 +1,6 @@
-Types::AuthProviderPhoneInput = GraphQL::InputObjectType.define do
-  name 'AUTH_PROVIDER_PHONE'
+class Types::AuthProviderPhoneInput < Types::BaseInputObject
+  description "Sign In inputs"
 
-  argument :phone, !types.String
-  argument :code, !types.String
+  argument :phone, String, "Phone Number", required: true
+  argument :code, String, "Code", required: true
 end

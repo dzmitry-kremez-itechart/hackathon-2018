@@ -9,8 +9,7 @@ class Mutations::SignInUser < GraphQL::Function
     input = args[:phone]
     return unless input
 
-    user = User.find_or_create_by(phone: input[:phone])
-    return unless user.authenticate(input[:code])
+    user = input[:phone]
 
     OpenStruct.new({
       token: AuthToken.token(user),

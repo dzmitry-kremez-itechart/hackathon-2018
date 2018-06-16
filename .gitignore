@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 Fredit-api/.bundle
+Fredit-api/.env
 
 # Ignore all logfiles and tempfiles.
 Fredit-api/log/*

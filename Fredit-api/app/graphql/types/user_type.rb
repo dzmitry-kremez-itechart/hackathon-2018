@@ -1,11 +1,6 @@
-Types::UserType = GraphQL::ObjectType.define do
-  name 'User'
+class Types::UserType < Types::BaseObject
+  field :id, ID, null: false
+  field :phone, String, null: false
 
-  field :id, !types.ID
-  field :phone, !types.String
-
-  field :passport, !types[Types::PassportType] do
-    preload :passport
-    resolve -> (obj, args, ctx) { obj.passport }
-  end
+  # field :passport, Types::PassportType, null: true
 end

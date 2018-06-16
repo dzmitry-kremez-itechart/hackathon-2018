@@ -1,14 +1,14 @@
-Types::PassportType = GraphQL::ObjectType.define do
-  name 'Passport'
+class Types::PassportType < Types::BaseObject
+  graphql_name 'Passport'
 
-  field :id, !types.ID
-  field :first_name, !types.String
-  field :last_name, !types.String
-  field :number, !types.String
-  field :identification, !types.String
-  field :nationality, !types.String
-  field :place_of_birth, !types.String
-  field :date_of_birth, !types.String
-  field :date_of_issue, !types.String
-  field :date_of_expire, !types.String
+  field :id, ID, null: false
+  field :first_name, String, null: true
+  field :last_name, String, null: true
+  field :number, String, null: true
+  field :identification, String, null: true
+  field :nationality, String, null: true
+  field :place_of_birth, String, null: true
+  field :date_of_birth, String, null: true
+  field :date_of_issue, String, null: true
+  field :date_of_expire, String, null: true
 end

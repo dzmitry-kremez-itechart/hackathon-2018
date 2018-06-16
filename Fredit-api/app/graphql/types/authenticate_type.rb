@@ -1,6 +1,6 @@
-Types::AuthenticateType = GraphQL::ObjectType.define do
-  name 'Authenticate'
+class Types::AuthenticateType < Types::BaseObject
+  graphql_name 'Authenticate'
 
-  field :token, types.String
-  field :user, Types::UserType
+  field :token, String, null: false
+  field :user, Types::UserType, null: false
 end
