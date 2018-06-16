@@ -1,24 +1,44 @@
-import * as React from "react";
-import { Text, View } from "react-native";
-import Swiper from "react-native-swiper";
-import { COLORS } from "../../utils/constants";
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import Swiper from 'react-native-swiper';
+import { COLORS } from '../../utils/constants';
 
 // styles
-import { styles } from "./styles";
+import { styles } from './styles';
 
 // components
-import Button from "../../components/Button";
-import InputBox from "../../components/InputBox";
+import Button from '../../components/Button';
+import InputBox from '../../components/InputBox';
+import InputMaskBox from '../../components/InputMaskBox';
 
 export default class WelcomeScreen extends React.Component {
-  state = { phoneNumber: "+375", code: "" };
+  state = { phoneNumber: '375', code: '', hasPhoneError: true };
+
+  validatePhone = () => {
+    return this.state.phoneNumber.length === 12;
+  };
+
+  scrollPhoneNext = () => {
+    if (this.validatePhone()) {
+      this.scrollNext();
+    }
+  };
 
   scrollNext = () => {
     this.swiper.scrollBy(1);
   };
 
   setCode = code => this.setState({ code });
-  setPhoneNumber = phoneNumber => this.setState({ phoneNumber });
+  setPhoneNumber = (formatted, extracted) => {
+    if (extracted.length <= 12) {
+      this.setState({ phoneNumber: extracted });
+    }
+    if (extracted.length === 12) {
+      this.setState({ hasPhoneError: false });
+    } else {
+      this.setState({ hasPhoneError: true });
+    }
+  };
 
   renderWelcomeScreen = () => (
     <View style={styles.container}>
@@ -43,15 +63,17 @@ export default class WelcomeScreen extends React.Component {
         style={styles.welcomeDescriptionText}
       >{`Please, enter your\nphone number`}</Text>
       <View style={styles.buttonWrapper}>
-        <InputBox
+        <InputMaskBox
           onChangeText={this.setPhoneNumber}
           value={this.state.phoneNumber}
-          textColor={COLORS.primary}
+          textColor={COLORS.textColor}
           color={COLORS.primary}
+          mask={'+[000] ([00]) [000]-[00]-[00]'}
         />
         <View style={{ height: 16 }} />
         <Button
-          onPress={this.scrollNext}
+          disabled={this.state.hasPhoneError}
+          onPress={this.scrollPhoneNext}
           text="request code"
           textColor={COLORS.background}
           color={COLORS.primary}
