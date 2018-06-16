@@ -8,7 +8,6 @@ import MainNavigator from "./MainNavigator";
 
 // screens
 import WelcomeScreen from "../screens/WelcomeScreen";
-import CreditCardScreen from "../screens/CreditCardScreen";
 import PassportScreen from "../screens/PassportScreen";
 
 // constants
@@ -44,15 +43,12 @@ export default createStackNavigator(
     [MAIN_NAVIGATOR]: {
       screen: MainNavigator
     },
-    [CREDIT_CARD_SCREEN]: {
-      screen: props => <CreditCardScreen {...props} />
-    },
     [PASSPORT_SCREEN]: {
       screen: props => <PassportScreen {...props} />
     }
   },
   {
     headerMode: "none",
-    // initialRouteName: MAIN_NAVIGATOR
+    initialRouteName: MAIN_NAVIGATOR
   }
 );
