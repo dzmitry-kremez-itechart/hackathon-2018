@@ -2,6 +2,8 @@ import * as React from "react";
 import { AppRegistry } from "react-native";
 import { createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
+import storage from "redux-persist/lib/storage";
+
 import { Provider } from "react-redux";
 
 //reducers
@@ -9,6 +11,11 @@ import rootReducer from "./src/redux/reducers/rootReducer";
 
 // navigators
 import App from "./src/navigators/AppNavigator";
+
+const persistConfig = {
+  key: "root",
+  storage
+};
 
 const store = createStore(
   rootReducer,
