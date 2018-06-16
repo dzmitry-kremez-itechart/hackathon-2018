@@ -6,7 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 debitor = User.find_or_create_by(phone: '375291112233')
-Passport.find_or_create_by(
+
+p = Passport.find_or_create_by(
   user: debitor,
   first_name: 'Vasia',
   last_name: 'Pupkin',

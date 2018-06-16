@@ -46,6 +46,8 @@ GEM
       activerecord (>= 3.2, < 6.0)
       rake (>= 10.4, < 13.0)
     arel (9.0.0)
+    authy (2.7.4)
+      httpclient (>= 2.5.3.3)
     bootsnap (1.3.0)
       msgpack (~> 1.0)
     builder (3.2.3)
@@ -65,6 +67,7 @@ GEM
       railties
       sprockets-rails
     graphql (1.8.3)
+    httpclient (2.8.3)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     json (2.1.0)
@@ -155,6 +158,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  authy
   bootsnap (>= 1.1.0)
   byebug
   dotenv-rails
