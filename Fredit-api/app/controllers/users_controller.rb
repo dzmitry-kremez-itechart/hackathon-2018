@@ -3,10 +3,12 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      code, number = @user.phone[0..2], @user.phone[3..-1]
+
       authy = Authy::API.register_user(
         email: 'roma.shorin@gmail.com',
-        cellphone: @user.phone,
-        country_code: 375
+        cellphone: number,
+        country_code: code
       )
 
       @user.update(authy_id: authy.id)

@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Text, View } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import { connect } from 'react-redux';
-import { createUser } from '../redux/actions/welcomeScreenActions';
+import { createUser, verifySMSCode } from '../redux/actions/appActions';
 // navigators
 import MainNavigator from "./MainNavigator";
 
@@ -17,9 +16,13 @@ export default createStackNavigator(
     [WELCOME_SCREEN]: {
       screen: connect((state) => ({
         token: state.appReducer.token,
+        verified: state.appReducer.userVerified,
       }), (dispatch) => ({
         onSubmitPhoneNumber: (phoneNumber) => {
           dispatch(createUser(phoneNumber));
+        },
+        onCodeVerification: (code) => {
+          dispatch(verifySMSCode(code));
         }
       }))((props) => (
         <WelcomeScreen

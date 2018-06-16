@@ -12,7 +12,7 @@ import InputBox from '../../components/InputBox';
 import InputMaskBox from '../../components/InputMaskBox';
 
 export default class WelcomeScreen extends React.Component {
-  state = { phoneNumber: '375', code: '', hasPhoneError: true };
+  state = { phoneNumber: '375', code: '', hasPhoneError: true, hasCodeError: true };
 
   validatePhone = () => {
     return this.state.phoneNumber.length === 12;
@@ -30,11 +30,14 @@ export default class WelcomeScreen extends React.Component {
   
   componentWillReceiveProps(nextProps) {
     if (!this.props.token && nextProps.token) {
-      scrollPhoneNext();
+      this.scrollPhoneNext();
+    }
+
+    if (!this.props.verified && nextProps.verified) {
+      this.props.openMain();
     }
   }
 
-  setCode = code => this.setState({ code });
   setPhoneNumber = (formatted, extracted) => {
     if (extracted.length <= 12) {
       this.setState({ phoneNumber: extracted });
@@ -43,6 +46,14 @@ export default class WelcomeScreen extends React.Component {
       this.setState({ hasPhoneError: false });
     } else {
       this.setState({ hasPhoneError: true });
+    }
+  };
+
+  setCode = (code) => {
+    if (code.length === 7) {
+      this.setState({ code, hasCodeError: false });
+    } else {
+      this.setState({ hasCodeError: true })
     }
   };
 
@@ -102,7 +113,8 @@ export default class WelcomeScreen extends React.Component {
         />
         <View style={{ height: 16 }} />
         <Button
-          onPress={this.props.openMain}
+          onPress={() => this.props.onCodeVerification(this.state.code)}
+          disabled={this.state.hasCodeError}
           text="start to use"
           textColor={COLORS.background}
           color={COLORS.primary}
