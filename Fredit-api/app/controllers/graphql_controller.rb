@@ -5,13 +5,21 @@ class GraphqlController < ApplicationController
     operation_name = params[:operationName]
     context = {
       # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user,
     }
     result = FreditApiSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
   end
 
   private
+
+  def current_user
+    binding.pry
+    return nil if request.headers['Authorization'].blank?
+    token = request.headers['Authorization'].split(' ').last
+    return nil if token.blank?
+    AuthToken.verify(token)
+  end
 
   # Handle form data, JSON body, or a blank value
   def ensure_hash(ambiguous_param)
