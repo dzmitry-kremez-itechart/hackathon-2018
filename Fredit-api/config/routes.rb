@@ -10,4 +10,11 @@ Rails.application.routes.draw do
       post :resend
     end
   end
+
+  resources :credit_cards, only: :create
+  resources :loan_contracts, only: :create do
+    member do
+      post :accept
+    end
+  end
 end
