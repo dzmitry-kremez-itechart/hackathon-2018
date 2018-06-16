@@ -34,11 +34,15 @@ ActiveRecord::Schema.define(version: 2018_06_16_121921) do
     t.integer "time_period_type", default: 0, null: false
     t.integer "issued_amount", default: 0, null: false
     t.integer "return_amount", default: 0, null: false
+    t.integer "request_status", default: 0, null: false
+    t.integer "state", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["creditor_id", "debtor_id"], name: "index_loan_contracts_on_creditor_id_and_debtor_id", unique: true
     t.index ["creditor_id"], name: "index_loan_contracts_on_creditor_id"
     t.index ["debtor_id"], name: "index_loan_contracts_on_debtor_id"
+    t.index ["request_status"], name: "index_loan_contracts_on_request_status"
+    t.index ["state"], name: "index_loan_contracts_on_state"
   end
 
   create_table "passports", force: :cascade do |t|
