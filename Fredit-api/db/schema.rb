@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_102820) do
+ActiveRecord::Schema.define(version: 2018_06_16_104244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "passports", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "number"
+    t.string "identification"
+    t.string "nationality"
+    t.date "place_of_birth"
+    t.date "date_of_birth"
+    t.date "date_of_issue"
+    t.date "date_of_expire"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_passports_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "phone"
