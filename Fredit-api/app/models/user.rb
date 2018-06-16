@@ -12,6 +12,8 @@
 
 class User < ApplicationRecord
   has_one :passport
+  has_many :creditor_loan_contracts, foreign_key: :creditor_id, class_name: 'LoanContract'
+  has_many :debtor_loan_contracts, foreign_key: :debtor_id, class_name: 'LoanContract'
 
   enum status: [:debtor, :creditor]
 
