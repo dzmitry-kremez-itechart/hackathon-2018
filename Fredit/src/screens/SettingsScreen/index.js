@@ -1,7 +1,7 @@
 import * as React from "react";
-import { Text, View, SectionList, Switch } from "react-native";
+import { Text, View, SectionList, Switch, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { COLORS } from "../../utils/constants";
+import { COLORS, SETTING_ITEMS } from "../../utils/constants";
 
 export default class SettingsScreen extends React.Component {
   state = {}
@@ -11,7 +11,7 @@ export default class SettingsScreen extends React.Component {
       contentContainerStyle={{paddingTop: 20}}
       stickySectionHeadersEnabled={false}
       renderItem={({ item, index, section }) =>
-        <View
+        <TouchableOpacity
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -26,21 +26,25 @@ export default class SettingsScreen extends React.Component {
             backgroundColor: '#F5F5F5'
           }}
           key={index}
+          onPress={() =>{ this.props.onItemPress(item.icon); console.log(item) } }
         >
-          <View style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingTop: 10,
-            paddingBottom: 10,
-            paddingLeft: 16
-          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingTop: 10,
+              paddingBottom: 10,
+              paddingLeft: 16
+            }}
+            onTouch={() => this.setState({ touchedItem: item.icon })}
+          >
             <Icon
               name={item.icon}
               color={COLORS.primaryDark}
               size={25}
             />
-            <Text style={{fontSize: 16, paddingLeft: 10}}>{item.text}</Text>
+            <Text style={{fontSize: 16, paddingLeft: 10 }}>{item.text}</Text>
           </View>
 
           {
@@ -57,7 +61,7 @@ export default class SettingsScreen extends React.Component {
               />
           }
   
-        </View>
+        </TouchableOpacity>
       }
       renderSectionHeader={({ section: { title } }) => (
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 30, paddingBottom: 5, paddingLeft: 20 }}>
@@ -68,9 +72,9 @@ export default class SettingsScreen extends React.Component {
         {
           title: 'General',
           data: [
-            { icon: 'credit-card', text: 'Credit Cards' },
+            { icon: SETTING_ITEMS.creditCard, text: 'Credit Cards', onPress: this.props.onCreditCardPress },
             { icon: 'account-box', text: 'Account' },
-            { icon: 'picture-in-picture', text: 'Passport' },
+            { icon: SETTING_ITEMS.passport, text: 'Passport' },
             { icon: 'lock', text: 'Privacy and Security Help' },
             { icon: 'language', text: 'Language' },
           ]

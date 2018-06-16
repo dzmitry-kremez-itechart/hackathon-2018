@@ -24,3 +24,8 @@ export const SET_USER_VERIFIED_ERROR_ACTION = 'SET_USER_VERIFIED_ERROR_ACTION';
 
 // url
 export const URL = "http://localhost:3000"
+
+export const SETTING_ITEMS = {
+  creditCard: 'credit-card',
+  passport: 'picture-in-picture', 
+};
