@@ -3,8 +3,4 @@ class Types::UserType < Types::BaseObject
   field :phone, String, null: false
 
   field :passport, Types::PassportType, null: true
-  def passport
-    binding.pry
-    object.passport
-  end
 end
