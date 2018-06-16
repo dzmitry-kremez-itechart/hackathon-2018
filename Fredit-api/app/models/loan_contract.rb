@@ -17,6 +17,7 @@
 class LoanContract < ApplicationRecord
   belongs_to :creditor, class_name: 'User'
   belongs_to :debtor, class_name: 'User'
+  has_many :payment_transactions
 
   enum time_period_type: [:week, :month, :year]
   enum request_status: [:issued, :cancelled, :accepted]
@@ -28,7 +29,9 @@ class LoanContract < ApplicationRecord
     :time_period,
     :time_period_type,
     :issued_amount,
-    :return_amount
+    :return_amount,
+    :creditor,
+    :debtor
   )
   validate :return_amount_more_than_issued
   validate :creditor_not_equals_to_debtor
