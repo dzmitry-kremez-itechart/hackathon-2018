@@ -51,5 +51,8 @@ export default createStackNavigator(
       screen: props => <PassportScreen {...props} />
     }
   },
-  { headerMode: "none" }
+  {
+    headerMode: "none",
+    initialRouteName: MAIN_NAVIGATOR
+  }
 );
