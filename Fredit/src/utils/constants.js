@@ -17,15 +17,15 @@ export const COLORS = {
 };
 
 // constants
-export const SET_LOGGED_IN_ACTION = 'SET_LOGGED_IN_ACTION';
-export const SET_TOKEN_ACTION = 'SET_TOKEN_ACTION';
-export const SET_USER_VERIFIED_ACTION = 'SET_USER_VERIFIED_ACTION';
-export const SET_USER_VERIFIED_ERROR_ACTION = 'SET_USER_VERIFIED_ERROR_ACTION';
+export const SET_LOGGED_IN_ACTION = "SET_LOGGED_IN_ACTION";
+export const SET_TOKEN_ACTION = "SET_TOKEN_ACTION";
+export const SET_USER_VERIFIED_ACTION = "SET_USER_VERIFIED_ACTION";
+export const SET_USER_VERIFIED_ERROR_ACTION = "SET_USER_VERIFIED_ERROR_ACTION";
 
 // url
-export const URL = "http://localhost:3000"
+export const URL = "https://fredit-app.herokuapp.com/graphiql";
 
 export const SETTING_ITEMS = {
-  creditCard: 'credit-card',
-  passport: 'picture-in-picture', 
+  creditCard: "credit-card",
+  passport: "picture-in-picture"
 };

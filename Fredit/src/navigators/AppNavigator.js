@@ -53,6 +53,6 @@ export default createStackNavigator(
   },
   {
     headerMode: "none",
-    initialRouteName: MAIN_NAVIGATOR
+    // initialRouteName: MAIN_NAVIGATOR
   }
 );
