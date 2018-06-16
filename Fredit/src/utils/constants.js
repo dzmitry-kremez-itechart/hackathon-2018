@@ -10,10 +10,10 @@ export const PASSPORT_SCREEN = "PASSPORT_SCREEN";
 // colors
 export const COLORS = {
   background: "#FFFFFF",
-  primaryDark: "#7B1FA2",
-  primary: "#9C27B0",
-  accent: "",
-  primaryDisabled: "#E1BEE7"
+  primaryDark: "#455A64",
+  primary: "#607D8B",
+  primaryDisabled: "#CFD8DC",
+  textColor: "rgba(0,0,0, 0.8)"
 };
 
 // constants
