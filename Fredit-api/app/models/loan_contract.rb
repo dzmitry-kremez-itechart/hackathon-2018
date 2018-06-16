@@ -27,7 +27,6 @@ class LoanContract < ApplicationRecord
 
   validates :issued_amount, numericality: { greater_than: 0 }
   validates_presence_of(
-    :start_date,
     :time_period,
     :time_period_type,
     :issued_amount,
