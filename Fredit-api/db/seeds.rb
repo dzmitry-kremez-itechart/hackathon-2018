@@ -48,18 +48,24 @@ c1 = CreditCard.find_or_create_by(
   expiration_date: 1.year.from_now,
   cvc: 321,
 )
+50.times do |i|
+  issued_amount = rand(i+1..i+2) * 1000
+  return_amount = rand(i+2..i+5) * 1000
+  lc = LoanContract.find_or_create_by(
+    debtor: debtor,
+    creditor: creditor,
+    time_period: rand(1..12),
+    time_period_type: rand(0..2),
+    issued_amount: issued_amount,
+    return_amount: return_amount,
+    start_date: rand(1..100).days.from_now.to_date
+  )
+  p lc
+  pt = PaymentTransaction.find_or_create_by(
+    loan_contract: lc,
+    amount: return_amount,
+    status: :success
+  )
+  p pt
+end
 
-lc = LoanContract.find_or_create_by(
-  debtor: debtor,
-  creditor: creditor,
-  time_period: 1,
-  issued_amount: 100_00,
-  return_amount: 110_00,
-)
-lc.start_date = 10.minutes.from_now,
-lc.save
-pt = PaymentTransaction.find_or_create_by(
-  loan_contract: lc,
-  amount: 110_00,
-  status: :success
-)

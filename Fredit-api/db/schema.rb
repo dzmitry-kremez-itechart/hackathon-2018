@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_133007) do
+ActiveRecord::Schema.define(version: 2018_06_16_174535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2018_06_16_133007) do
   create_table "loan_contracts", force: :cascade do |t|
     t.integer "creditor_id"
     t.integer "debtor_id"
-    t.datetime "start_date", null: false
+    t.datetime "start_date"
     t.integer "time_period", default: 0, null: false
     t.integer "time_period_type", default: 0, null: false
     t.integer "issued_amount", default: 0, null: false
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 2018_06_16_133007) do
     t.integer "state", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["creditor_id", "debtor_id"], name: "index_loan_contracts_on_creditor_id_and_debtor_id", unique: true
     t.index ["creditor_id"], name: "index_loan_contracts_on_creditor_id"
     t.index ["debtor_id"], name: "index_loan_contracts_on_debtor_id"
     t.index ["request_status"], name: "index_loan_contracts_on_request_status"
