@@ -1,8 +1,8 @@
 import * as React from "react";
 import { createBottomTabNavigator, Navigation } from "react-navigation";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { createCreditCard } from '../redux/actions/appActions';
-import { connect } from 'react-redux';
+import { createCreditCard } from "../redux/actions/appActions";
+import { connect } from "react-redux";
 
 // screens
 import LoanContractScreen from "../screens/LoanContractScreen";
@@ -15,6 +15,7 @@ import {
   LOAN_CONTRACT_SCREEN,
   MY_CONTRACTS_SCREEN,
   SETTINGS_SCREEN,
+  CONTRACT_DETAIL_SCREEN,
   CREDIT_CARD_SCREEN,
   PASSPORT_SCREEN,
   COLORS,
@@ -24,7 +25,17 @@ import {
 export default createBottomTabNavigator(
   {
     [LOAN_CONTRACT_SCREEN]: {
-      screen: props => <LoanContractScreen {...props} />,
+      screen: props => (
+        <LoanContractScreen
+          {...props}
+          openDetail={contract =>
+            props.navigation.navigate({
+              routeName: CONTRACT_DETAIL_SCREEN,
+              params: { contract }
+            })
+          }
+        />
+      ),
       navigationOptions: () => ({
         tabBarIcon: ({ focused }) => (
           <Icon
@@ -48,14 +59,14 @@ export default createBottomTabNavigator(
       })
     },
     [CREDIT_CARD_SCREEN]: {
-      screen: connect(null, (dispatch) => ({
-        onSubmitCreditCard: (creditCard) => {
-          dispatch(createCreditCard(creditCard));
-        },
-      }))(props => <CreditCardScreen
-        {...props}
-        creditCards={[]}
-      />),
+      screen: connect(
+        null,
+        dispatch => ({
+          onSubmitCreditCard: creditCard => {
+            dispatch(createCreditCard(creditCard));
+          }
+        })
+      )(props => <CreditCardScreen {...props} creditCards={[]} />),
       navigationOptions: () => ({
         tabBarIcon: ({ focused }) => (
           <Icon

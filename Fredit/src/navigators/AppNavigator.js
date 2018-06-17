@@ -9,12 +9,14 @@ import MainNavigator from "./MainNavigator";
 // screens
 import WelcomeScreen from "../screens/WelcomeScreen";
 import PassportScreen from "../screens/PassportScreen";
+import ContractDetailScreen from "../screens/ContractDetailScreen";
 
 // constants
 import {
   WELCOME_SCREEN,
   MAIN_NAVIGATOR,
-  CREDIT_CARD_SCREEN,
+  MY_CONTRACTS_SCREEN,
+  CONTRACT_DETAIL_SCREEN,
   PASSPORT_SCREEN
 } from "../utils/constants";
 
@@ -48,6 +50,22 @@ export default createStackNavigator(
     },
     [PASSPORT_SCREEN]: {
       screen: props => <PassportScreen {...props} />
+    },
+    [CONTRACT_DETAIL_SCREEN]: {
+      screen: props => (
+        <ContractDetailScreen
+          {...props}
+          contract={
+            props.navigation.state.params
+              ? props.navigation.state.params.contract
+              : {}
+          }
+          goBack={() => props.navigation.goBack()}
+          openMyContracts={() =>
+            props.navigation.navigate({ routeName: MY_CONTRACTS_SCREEN })
+          }
+        />
+      )
     }
   },
   {

@@ -270,45 +270,49 @@ class LoanContractScreen extends React.Component {
                   ).toFixed(0);
 
                   return (
-                    <View
-                      style={{
-                        borderRadius: 4,
-                        shadowOpacity: 0.45,
-                        shadowRadius: 2,
-                        paddingHorizontal: 16,
-                        shadowColor: "#E0E0E0",
-                        shadowOffset: { height: 0, width: 0 },
-                        height: 56,
-                        flexDirection: "row",
-                        alignItems: "center",
-                        backgroundColor: COLORS.background
-                      }}
-                    >
-                      <View style={{ flex: 1 }}>
-                        <Text>{`In: ${issuedAmount} $`}</Text>
-                        <Text>{`Out: ${returnAmount} $`}</Text>
-                      </View>
-                      <Text
-                        style={{ marginRight: 16, fontSize: 28 }}
-                      >{`${percent} %`}</Text>
+                    <TouchableOpacity onPress={() => this.props.openDetail(item)}>
                       <View
                         style={{
+                          borderRadius: 4,
+                          shadowOpacity: 0.45,
+                          shadowRadius: 2,
+                          paddingHorizontal: 16,
+                          shadowColor: "#E0E0E0",
+                          shadowOffset: { height: 0, width: 0 },
                           height: 56,
-                          width: 2,
-                          backgroundColor: "#F5F5F5"
-                        }}
-                      />
-                      <View
-                        style={{
-                          marginLeft: 16,
-                          justifyContent: "center",
-                          alignItems: "center"
+                          flexDirection: "row",
+                          alignItems: "center",
+                          backgroundColor: COLORS.background
                         }}
                       >
-                        <Text style={{ fontSize: 28 }}>{item.timePeriod}</Text>
-                        <Text>days</Text>
+                        <View style={{ flex: 1 }}>
+                          <Text>{`In: ${issuedAmount} $`}</Text>
+                          <Text>{`Out: ${returnAmount} $`}</Text>
+                        </View>
+                        <Text
+                          style={{ marginRight: 16, fontSize: 28 }}
+                        >{`${percent} %`}</Text>
+                        <View
+                          style={{
+                            height: 56,
+                            width: 2,
+                            backgroundColor: "#F5F5F5"
+                          }}
+                        />
+                        <View
+                          style={{
+                            marginLeft: 16,
+                            justifyContent: "center",
+                            alignItems: "center"
+                          }}
+                        >
+                          <Text style={{ fontSize: 28 }}>
+                            {item.timePeriod}
+                          </Text>
+                          <Text>days</Text>
+                        </View>
                       </View>
-                    </View>
+                    </TouchableOpacity>
                   );
                 }}
               />
@@ -320,11 +324,12 @@ class LoanContractScreen extends React.Component {
   }
 }
 
-export default () => (
+export default props => (
   <Query
     query={gql`
       {
         issuedLoanContracts {
+          id
           issuedAmount
           returnAmount
           timePeriod
@@ -364,7 +369,9 @@ export default () => (
           </View>
         );
       }
-      return <LoanContractScreen contracts={data.issuedLoanContracts} />;
+      return (
+        <LoanContractScreen {...props} contracts={data.issuedLoanContracts} />
+      );
     }}
   </Query>
 );
