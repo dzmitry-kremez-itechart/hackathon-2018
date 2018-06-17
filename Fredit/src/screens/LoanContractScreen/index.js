@@ -1,15 +1,25 @@
 import * as React from "react";
-import { Text, View, TouchableOpacity, FlatList } from "react-native";
-import { COLORS } from "../../utils/constants";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+  ActivityIndicator,
+  AsyncStorage
+} from "react-native";
+import { COLORS, URL } from "../../utils/constants";
 import InputBox from "../../components/InputBox";
 import Button from "../../components/Button";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
 
 class LoanContractScreen extends React.Component {
-  state = { selected: 0 };
+  state = { selected: 0, issuedAmount: "", returnAmount: "", duration: "" };
 
-  setSelected = index => this.setState({ selected: index });
+  setIssued = issuedAmount => this.setState({ issuedAmount });
+  setReturn = returnAmount => this.setState({ returnAmount });
+  setDuration = duration => this.setState({ duration });
+  setSelected = selected => this.setState({ selected });
 
   render() {
     const { selected } = this.state;
@@ -21,7 +31,7 @@ class LoanContractScreen extends React.Component {
             zIndex: 5,
             backgroundColor: "white",
             shadowOpacity: 0.85,
-            shadowRadius: 2,
+            shadowRadius: 1,
             paddingHorizontal: 16,
             shadowColor: "grey",
             shadowOffset: { height: 0, width: 0 },
@@ -101,8 +111,8 @@ class LoanContractScreen extends React.Component {
                   Issued Amount
                 </Text>
                 <InputBox
-                  onChangeText={() => {}}
-                  value={""}
+                  onChangeText={this.setIssued}
+                  value={this.state.issuedAmount}
                   textColor={COLORS.primary}
                   color={COLORS.primary}
                 />
@@ -112,26 +122,45 @@ class LoanContractScreen extends React.Component {
                   Return Amount
                 </Text>
                 <InputBox
-                  onChangeText={() => {}}
-                  value={""}
+                  onChangeText={this.setReturn}
+                  value={this.state.returnAmount}
                   textColor={COLORS.primary}
                   color={COLORS.primary}
                 />
               </View>
               <View style={{ marginVertical: 8 }}>
                 <Text style={{ marginBottom: 4, color: COLORS.primary }}>
-                  Return Duration
+                  Return Duration In Days
                 </Text>
                 <InputBox
-                  onChangeText={() => {}}
-                  value={""}
+                  onChangeText={this.setDuration}
+                  value={this.state.duration}
                   textColor={COLORS.primary}
                   color={COLORS.primary}
                 />
               </View>
               <View style={{ marginVertical: 16 }}>
                 <Button
-                  onPress={() => {}}
+                  onPress={async () => {
+                    const token = await AsyncStorage.getItem("TOKEN");
+
+                    await fetch(`${URL}/loan_contracts`, {
+                      method: "POST",
+                      headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        authorization: token ? `Bearer ${token}` : null
+                      },
+                      body: JSON.stringify({
+                        loan_contract: {
+                          time_period: Number(this.state.duration),
+                          time_period_type: "days",
+                          issued_amount: Number(this.state.issuedAmount) * 100,
+                          return_amount: Number(this.state.returnAmount) * 100
+                        }
+                      })
+                    });
+                  }}
                   text="create contract"
                   textColor={COLORS.background}
                   color={COLORS.primary}
@@ -217,11 +246,35 @@ export default () => (
     `}
   >
     {({ loading, error, data }) => {
-      console.log("LOADING", loading);
-      console.log("ERROR", error);
-      console.log("DARA", data);
       if (!data || loading) {
-        return <View />;
+        return (
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "#f5f5f5",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <View
+              style={{
+                borderRadius: 4,
+                shadowOpacity: 0.45,
+                shadowRadius: 2,
+                shadowColor: "#E0E0E0",
+                shadowOffset: { height: 0, width: 0 },
+                height: 100,
+                width: 140,
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: COLORS.background
+              }}
+            >
+              <ActivityIndicator animating size="large" color="grey" />
+              <Text style={{ marginTop: 8 }}>Loading</Text>
+            </View>
+          </View>
+        );
       }
       return <LoanContractScreen contracts={data.issuedLoanContracts} />;
     }}

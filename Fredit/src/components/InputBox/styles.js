@@ -5,8 +5,8 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 16,
     fontSize: 20,
     borderRadius: 4,
-    borderWidth: 2,
+    borderWidth: 1,
     minWidth: 240,
-    height: 56,
+    height: 56
   }
 });

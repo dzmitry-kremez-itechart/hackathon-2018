@@ -16,6 +16,8 @@ import rootReducer from "./src/redux/reducers/rootReducer";
 // navigators
 import App from "./src/navigators/AppNavigator";
 
+console.disableYellowBox = true;
+
 const httpLink = new HttpLink({ uri: `${URL}/graphql` });
 const authLink = setContext(async (req, { headers }) => {
   const token = await AsyncStorage.getItem("TOKEN");
