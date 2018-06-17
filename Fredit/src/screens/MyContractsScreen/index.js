@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import * as React from "react";
-=======
 import * as React from 'react';
 import moment from 'moment';
->>>>>>> 52570775ca4c532a871c88f65ed6f83024e52352
 import {
   Text,
   View,
