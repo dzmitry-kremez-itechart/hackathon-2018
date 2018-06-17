@@ -4,6 +4,7 @@ import { CreditCardInput } from "react-native-credit-card-input";
 import { COLORS } from "../../utils/constants";
 import { styles } from '../WelcomeScreen/styles';
 import Button from '../../components/Button';
+import CreditCardForm from '../../components/CreditCardForm';
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
@@ -11,15 +12,8 @@ import gql from "graphql-tag";
 class CreditCardScreen extends React.Component {
   state = { newCreditCardVisible: false, creditCard: { valid: false } };
 
-  setCreditCard = (form) => {
-    this.setState({
-      creditCard: {
-        expiration_date: form.values.expiry,
-        cvc: form.values.cvc,
-        number: form.values.number.replace(/ /g, ''),
-        valid: form.valid
-      },
-    });
+  setCreditCard = (creditCard) => {
+    this.setState({ creditCard });
   };
   
   onCreateCreditCard = () => {
@@ -29,29 +23,6 @@ class CreditCardScreen extends React.Component {
     }
   };
 
-  renderNewCreditCardForm = () =>
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center", margin: 20 }}>
-      <CreditCardInput onChange={this.setCreditCard} />
-      <View style={{ marginTop: -150}}>
-        <Button
-          text="Add Credit Card"
-          textColor={COLORS.background}
-          color={COLORS.primary}
-          disabled={!this.state.creditCard.valid}
-          onPress={this.onCreateCreditCard}
-        />
-        <TouchableOpacity
-          style={{ marginTop: 10, marginLeft: 70}}
-          onPress={() => this.setState({newCreditCardVisible: false})}
-          disabled={this.state.creditCard.valid}
-        >
-          <View style={{ alignContent: 'center', justifyContent: "center"}}>
-            <Text style={{ fontStyle: 'italic', fontSize: 15, color: COLORS.primary}}>Return to lists</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>;
-
   renderCreditCardLists = () => {
     return <View style={{
       margin: 20,
@@ -59,7 +30,6 @@ class CreditCardScreen extends React.Component {
     }}>
       <View style={{ marginVertical: 16 }}>
         <Button
-          onPress={() => { }}
           text="add credit card"
           textColor={COLORS.background}
           color={COLORS.primary}
@@ -163,8 +133,12 @@ class CreditCardScreen extends React.Component {
         </View>
       {
         this.state.newCreditCardVisible ?
-        this.renderNewCreditCardForm() :
-        this.renderCreditCardLists()
+          <CreditCardForm
+            onPress={this.onCreateCreditCard}
+            onReturn={() => this.setState({newCreditCardVisible: false})}
+            setCreditCard={this.setCreditCard}
+          /> :
+          this.renderCreditCardLists()
       }
       </View>
     );
