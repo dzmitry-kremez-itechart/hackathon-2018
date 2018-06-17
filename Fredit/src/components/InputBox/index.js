@@ -23,18 +23,26 @@ export default class InputBox extends React.Component {
       textColor,
       onChangeText,
       disabled,
-      disabledColor
+      disabledColor,
+      height,
+      fontSize,
+      multiline,
+      numberOfLines
     } = this.props;
 
     return (
       <TextInput
         value={value}
         onChangeText={onChangeText}
+        multiline={!!multiline}
+        numberOfLines={numberOfLines || 1}
         style={[
           styles.input,
           {
             color: textColor,
-            borderColor: !disabled ? color : disabledColor
+            borderColor: !disabled ? color : disabledColor,
+            height: height || 56,
+            fontSize: fontSize || 20
           }
         ]}
       />

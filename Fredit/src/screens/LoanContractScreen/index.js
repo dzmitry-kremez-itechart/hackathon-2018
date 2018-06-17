@@ -33,6 +33,7 @@ class LoanContractScreen extends React.Component {
   setIssued = issuedAmount => this.setState({ issuedAmount });
   setReturn = returnAmount => this.setState({ returnAmount });
   setDuration = duration => this.setState({ duration });
+  setDescription = description => this.setState({ description });
   setSelected = selected => this.setState({ selected });
 
   render() {
@@ -131,35 +132,53 @@ class LoanContractScreen extends React.Component {
                 >
                   <View style={{ marginVertical: 8 }}>
                     <Text style={{ marginBottom: 4, color: COLORS.primary }}>
-                      Issued Amount
+                      Wanted Amount $
                     </Text>
                     <InputBox
                       onChangeText={this.setIssued}
                       value={this.state.issuedAmount}
                       textColor={COLORS.primary}
                       color={COLORS.primary}
+                      height={42}
                     />
                   </View>
                   <View style={{ marginVertical: 8 }}>
                     <Text style={{ marginBottom: 4, color: COLORS.primary }}>
-                      Return Amount
+                      Return Amount $
                     </Text>
                     <InputBox
                       onChangeText={this.setReturn}
                       value={this.state.returnAmount}
                       textColor={COLORS.primary}
                       color={COLORS.primary}
+                      height={42}
                     />
                   </View>
                   <View style={{ marginVertical: 8 }}>
                     <Text style={{ marginBottom: 4, color: COLORS.primary }}>
-                      Return Duration In Days
+                      Duration In Days
                     </Text>
                     <InputBox
                       onChangeText={this.setDuration}
                       value={this.state.duration}
                       textColor={COLORS.primary}
                       color={COLORS.primary}
+                      height={42}
+                    />
+                  </View>
+                  <View style={{ marginVertical: 8 }}>
+                    <Text style={{ marginBottom: 4, color: COLORS.primary }}>
+                      Description
+                    </Text>
+                    <InputBox
+                      onChangeText={this.setDescription}
+                      value={this.state.description}
+                      textColor={COLORS.primary}
+                      color={COLORS.primary}
+                      height={72}
+                      fontSize={16}
+                      multiline = {true}
+                      numberOfLines = {4}
                     />
                   </View>
                   <View style={{ marginVertical: 16 }}>

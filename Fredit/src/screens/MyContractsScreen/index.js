@@ -160,7 +160,16 @@ class LoanContractScreen extends React.Component {
                           backgroundColor: '#F5F5F5'
                         }}
                       />
-                      <View
+                      {item.requestStatus === 'accepted' && (<View
+                        style={{
+                          marginLeft: 6,
+                          justifyContent: 'center',
+                          alignItems: 'center'
+                        }}
+                      >
+                        <Text style={{ fontSize: 14 }}>Exp: {moment(item.startDate).add(item.timePeriod).format('DD/MM/YY')}</Text>
+                      </View>)}
+                      {item.requestStatus !== 'accepted' && (<View
                         style={{
                           marginLeft: 6,
                           justifyContent: 'center',
@@ -169,7 +178,7 @@ class LoanContractScreen extends React.Component {
                       >
                         <Text style={{ fontSize: 28 }}>{item.timePeriod}</Text>
                         <Text>days</Text>
-                      </View>
+                      </View>)}
                     </View>
                   );
                 }}

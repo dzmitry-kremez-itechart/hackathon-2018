@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_16_223808) do
+ActiveRecord::Schema.define(version: 2018_06_17_035621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2018_06_16_223808) do
     t.integer "state", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "description"
     t.index ["creditor_id"], name: "index_loan_contracts_on_creditor_id"
     t.index ["debtor_id"], name: "index_loan_contracts_on_debtor_id"
     t.index ["request_status"], name: "index_loan_contracts_on_request_status"
