@@ -12,10 +12,24 @@ import InputBox from "../../components/InputBox";
 import Button from "../../components/Button";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 class LoanContractScreen extends React.Component {
-  state = { selected: 0, issuedAmount: "", returnAmount: "", duration: "" };
+  state = {
+    selected: 0,
+    issuedAmount: "",
+    returnAmount: "",
+    duration: "",
+    success: false
+  };
 
+  clearForm = () =>
+    this.setState({
+      issuedAmount: "",
+      returnAmount: "",
+      duration: ""
+    });
+  setSuccess = success => this.setState({ success });
   setIssued = issuedAmount => this.setState({ issuedAmount });
   setReturn = returnAmount => this.setState({ returnAmount });
   setDuration = duration => this.setState({ duration });
@@ -102,70 +116,144 @@ class LoanContractScreen extends React.Component {
                 shadowColor: "#E0E0E0",
                 padding: 16,
                 margin: 16,
+                flex: 1,
                 shadowOffset: { height: 0, width: 0 },
                 backgroundColor: COLORS.background
               }}
             >
-              <View style={{ marginVertical: 8 }}>
-                <Text style={{ marginBottom: 4, color: COLORS.primary }}>
-                  Issued Amount
-                </Text>
-                <InputBox
-                  onChangeText={this.setIssued}
-                  value={this.state.issuedAmount}
-                  textColor={COLORS.primary}
-                  color={COLORS.primary}
-                />
-              </View>
-              <View style={{ marginVertical: 8 }}>
-                <Text style={{ marginBottom: 4, color: COLORS.primary }}>
-                  Return Amount
-                </Text>
-                <InputBox
-                  onChangeText={this.setReturn}
-                  value={this.state.returnAmount}
-                  textColor={COLORS.primary}
-                  color={COLORS.primary}
-                />
-              </View>
-              <View style={{ marginVertical: 8 }}>
-                <Text style={{ marginBottom: 4, color: COLORS.primary }}>
-                  Return Duration In Days
-                </Text>
-                <InputBox
-                  onChangeText={this.setDuration}
-                  value={this.state.duration}
-                  textColor={COLORS.primary}
-                  color={COLORS.primary}
-                />
-              </View>
-              <View style={{ marginVertical: 16 }}>
-                <Button
-                  onPress={async () => {
-                    const token = await AsyncStorage.getItem("TOKEN");
-
-                    await fetch(`${URL}/loan_contracts`, {
-                      method: "POST",
-                      headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                        authorization: token ? `Bearer ${token}` : null
-                      },
-                      body: JSON.stringify({
-                        loan_contract: {
-                          time_period: Number(this.state.duration),
-                          time_period_type: "days",
-                          issued_amount: Number(this.state.issuedAmount) * 100,
-                          return_amount: Number(this.state.returnAmount) * 100
-                        }
-                      })
-                    });
+              {!this.state.success ? (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center"
                   }}
-                  text="create contract"
-                  textColor={COLORS.background}
-                  color={COLORS.primary}
-                />
-              </View>
+                >
+                  <View style={{ marginVertical: 8 }}>
+                    <Text style={{ marginBottom: 4, color: COLORS.primary }}>
+                      Issued Amount
+                    </Text>
+                    <InputBox
+                      onChangeText={this.setIssued}
+                      value={this.state.issuedAmount}
+                      textColor={COLORS.primary}
+                      color={COLORS.primary}
+                    />
+                  </View>
+                  <View style={{ marginVertical: 8 }}>
+                    <Text style={{ marginBottom: 4, color: COLORS.primary }}>
+                      Return Amount
+                    </Text>
+                    <InputBox
+                      onChangeText={this.setReturn}
+                      value={this.state.returnAmount}
+                      textColor={COLORS.primary}
+                      color={COLORS.primary}
+                    />
+                  </View>
+                  <View style={{ marginVertical: 8 }}>
+                    <Text style={{ marginBottom: 4, color: COLORS.primary }}>
+                      Return Duration In Days
+                    </Text>
+                    <InputBox
+                      onChangeText={this.setDuration}
+                      value={this.state.duration}
+                      textColor={COLORS.primary}
+                      color={COLORS.primary}
+                    />
+                  </View>
+                  <View style={{ marginVertical: 16 }}>
+                    <Button
+                      onPress={async () => {
+                        const token = await AsyncStorage.getItem("TOKEN");
+
+                        await fetch(`${URL}/loan_contracts`, {
+                          method: "POST",
+                          headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            authorization: token ? `Bearer ${token}` : null
+                          },
+                          body: JSON.stringify({
+                            loan_contract: {
+                              time_period: Number(this.state.duration),
+                              time_period_type: "days",
+                              issued_amount:
+                                Number(this.state.issuedAmount) * 100,
+                              return_amount:
+                                Number(this.state.returnAmount) * 100
+                            }
+                          })
+                        });
+
+                        this.setSuccess(true);
+                        this.clearForm();
+                      }}
+                      text="create contract"
+                      textColor={COLORS.background}
+                      color={COLORS.primary}
+                    />
+                  </View>
+                  <Text
+                    style={{
+                      fontSize: 16,
+                      marginBottom: 8,
+                      color: COLORS.primary
+                    }}
+                  >
+                    or
+                  </Text>
+                  <Text
+                    onPress={() => this.setSelected(1)}
+                    style={{
+                      fontWeight: "bold",
+                      fontSize: 16,
+                      color: COLORS.primary
+                    }}
+                  >
+                    Become a Creditor
+                  </Text>
+                </View>
+              ) : (
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <View
+                    style={{
+                      height: 120,
+                      width: 120,
+                      borderRadius: 120 / 2,
+                      borderColor: COLORS.primary,
+                      borderWidth: 1,
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
+                    <Icon name="done" color={COLORS.primary} size={96} />
+                  </View>
+                  <Text
+                    style={{
+                      marginVertical: 32,
+                      fontSize: 18,
+                      textAlign: "center",
+                      color: COLORS.primary
+                    }}
+                  >
+                    {`Successfully Created!\nWe will notify you once anyone\naccept your credit request`}
+                  </Text>
+
+                  <Button
+                    onPress={() => this.setSuccess(false)}
+                    text="create another one"
+                    textColor={COLORS.background}
+                    color={COLORS.primary}
+                  />
+                </View>
+              )}
             </View>
           ) : (
             <View style={{ flex: 1 }}>
