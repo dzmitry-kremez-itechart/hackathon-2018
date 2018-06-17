@@ -9,6 +9,8 @@ class Types::QueryType < Types::BaseObject
     argument :offset, Integer, required: false
   end
   def issued_loan_contracts(limit: 100, offset: 0)
-    LoanContract.issued.order(created_at: :desc).offset(offset).limit(limit)
+    LoanContract.issued.where.not(
+      debtor_id: context[:current_user].id
+    ).order(created_at: :desc).offset(offset).limit(limit)
   end
 end

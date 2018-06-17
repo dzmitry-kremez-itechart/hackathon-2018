@@ -337,6 +337,7 @@ export default props => (
         }
       }
     `}
+    pollInterval={1000}
   >
     {({ loading, error, data }) => {
       if (!data || loading) {
