@@ -54,7 +54,6 @@ export default createBottomTabNavigator(
         },
       }))(props => <CreditCardScreen
         {...props}
-        creditCards={[]}
       />),
       navigationOptions: () => ({
         tabBarIcon: ({ focused }) => (

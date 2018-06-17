@@ -1,12 +1,14 @@
 import * as React from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, FlatList } from "react-native";
 import { CreditCardInput } from "react-native-credit-card-input";
 import { COLORS } from "../../utils/constants";
 import { styles } from '../WelcomeScreen/styles';
 import Button from '../../components/Button';
 import Icon from "react-native-vector-icons/MaterialIcons";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
-export default class CreditCardScreen extends React.Component {
+class CreditCardScreen extends React.Component {
   state = { newCreditCardVisible: false, creditCard: { valid: false } };
 
   setCreditCard = (form) => {
@@ -21,8 +23,10 @@ export default class CreditCardScreen extends React.Component {
   };
   
   onCreateCreditCard = () => {
-    this.props.onSubmitCreditCard(this.state.creditCard);
-    this.setState({ newCreditCardVisible: false });
+    if (this.state.creditCard.valid) {
+      this.props.onSubmitCreditCard(this.state.creditCard);
+      this.setState({ newCreditCardVisible: false });
+    }
   }
 
   renderNewCreditCardForm = () =>
@@ -48,25 +52,88 @@ export default class CreditCardScreen extends React.Component {
       </View>
     </View>;
 
-  renderCreditCardLists = () =>
-    <View style={{
-      margin: 20
+  renderCreditCardLists = () => {
+    return <View style={{
+      margin: 20,
+      flex: 1
     }}>
-      <TouchableOpacity style={{
-        paddingLeft: 20,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: '#F0F0F0',
-        borderWidth: 1,
-        borderColor: '#D0D0D0'
-      }} onPress={() => this.setState({newCreditCardVisible: true })}>
-        <Icon
-          name="control-point"
+      <View style={{ marginVertical: 16 }}>
+        <Button
+          onPress={() => { }}
+          text="create credit card"
+          textColor={COLORS.background}
           color={COLORS.primary}
-          size={50}
+          onPress={() => this.setState({ newCreditCardVisible: true })}
         />
-      </TouchableOpacity>
+      </View>
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={this.props.creditCards}
+          ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
+          renderItem={({ item }) => {
+            return (
+              <View
+                style={{
+                  borderRadius: 4,
+                  shadowOpacity: 0.45,
+                  shadowRadius: 2,
+                  paddingHorizontal: 10,
+                  shadowColor: "#E0E0E0",
+                  shadowOffset: { height: 0, width: 0 },
+                  height: 56,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  backgroundColor: COLORS.background
+                }}
+              >
+                <Icon
+                  name="credit-card"
+                  color={COLORS.primary}
+                  size={24}
+                />
+                <View style={{ flex: 1, paddingLeft: 5 }}>
+                  <Text>
+                    &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; &#8226;&#8226;&#8226;&#8226; {item.number.substring(12, 16)}</Text>
+                </View>
+                <View
+                  style={{
+                    height: 56,
+                    width: 2,
+                    backgroundColor: "#F5F5F5"
+                  }}
+                />
+                <View
+                  style={{
+                    marginLeft: 16,
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                {
+                  item.mainCard ?
+                    <Icon
+                      name="done"
+                      color={COLORS.primary}
+                      size={24}
+                    />
+                    :
+                    ''
+                }
+                  <TouchableOpacity>
+                    <Icon
+                      name="delete"
+                      color={COLORS.primary}
+                      size={24}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            );
+          }}
+        />
+      </View>
     </View>;
+  }
 
   render() {
     return (
@@ -98,3 +165,30 @@ export default class CreditCardScreen extends React.Component {
     );
   }
 }
+
+export default (props) => (
+  <Query
+    query={gql`
+      {
+        user {
+          creditCards {
+            number
+            expirationDate
+            mainCard
+          }
+        }
+      }
+    `}
+  >
+    {({ loading, error, data, refetch }) => {
+      console.log("LOADING", loading);
+      console.log("ERROR", error);
+      console.log("DARA", data);
+      if (!data || loading) {
+        return <View />;
+      }
+      console.log(data.user.creditCards)
+      return <CreditCardScreen creditCards={data.user.creditCards} {...props} refetch={refetch} />;
+    }}
+  </Query>
+);
