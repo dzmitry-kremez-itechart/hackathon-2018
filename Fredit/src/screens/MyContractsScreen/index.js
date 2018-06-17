@@ -82,7 +82,7 @@ class LoanContractScreen extends React.Component {
                   fontSize: 14,
                   color: selected === 0 ? 'white' : COLORS.primary
                 }}
-              >{`DEBITOR`}</Text>
+              >{`DEBTOR`}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity
