@@ -60,7 +60,7 @@ class CreditCardScreen extends React.Component {
       <View style={{ marginVertical: 16 }}>
         <Button
           onPress={() => { }}
-          text="create credit card"
+          text="add credit card"
           textColor={COLORS.background}
           color={COLORS.primary}
           onPress={() => this.setState({ newCreditCardVisible: true })}
