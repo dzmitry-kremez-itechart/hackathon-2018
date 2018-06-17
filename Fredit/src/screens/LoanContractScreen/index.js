@@ -28,7 +28,8 @@ class LoanContractScreen extends React.Component {
     this.setState({
       issuedAmount: "",
       returnAmount: "",
-      duration: ""
+      duration: "",
+      description: ""
     });
   setSuccess = success => this.setState({ success });
   setIssued = issuedAmount => this.setState({ issuedAmount });
