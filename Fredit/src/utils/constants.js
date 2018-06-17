@@ -21,6 +21,7 @@ export const SET_LOGGED_IN_ACTION = "SET_LOGGED_IN_ACTION";
 export const SET_TOKEN_ACTION = "SET_TOKEN_ACTION";
 export const SET_USER_VERIFIED_ACTION = "SET_USER_VERIFIED_ACTION";
 export const SET_USER_VERIFIED_ERROR_ACTION = "SET_USER_VERIFIED_ERROR_ACTION";
+export const CREDIT_CARD_CREATED = "CREDIT_CARD_CREATED";
 
 // url
 export const URL = "https://fredit-app.herokuapp.com";
