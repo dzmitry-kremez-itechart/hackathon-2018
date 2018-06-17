@@ -80,7 +80,7 @@ export default class ContractDetalScreen extends React.Component {
                 Issued Amount
               </Text>
               <Text style={{ fontSize: 18, color: COLORS.primaryDark }}>
-                {`${(this.props.contract.issuedAmount / 100).toFixed(2)} $`}
+                {`${(this.props.contract.issuedAmount / 100).toFixed(2)}$`}
               </Text>
             </View>
             <View
@@ -95,7 +95,7 @@ export default class ContractDetalScreen extends React.Component {
                 Return Amount
               </Text>
               <Text style={{ fontSize: 18, color: COLORS.primaryDark }}>
-                {`${(this.props.contract.returnAmount / 100).toFixed(2)} $`}
+                {`${(this.props.contract.returnAmount / 100).toFixed(2)}$`}
               </Text>
             </View>
             <View
@@ -107,7 +107,7 @@ export default class ContractDetalScreen extends React.Component {
               }}
             >
               <Text style={{ fontSize: 12, color: COLORS.primaryDark }}>
-                Return Duration In Days
+               Duration In Days
               </Text>
               <Text style={{ fontSize: 18, color: COLORS.primaryDark }}>
                 {`${this.props.contract.timePeriod}`}
@@ -140,7 +140,7 @@ export default class ContractDetalScreen extends React.Component {
                 Description
               </Text>
               <Text style={{ fontSize: 18, color: COLORS.primaryDark }}>
-                {`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`}
+                {this.props.contract.description || `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`}
               </Text>
             </View>
             <View
@@ -158,8 +158,8 @@ export default class ContractDetalScreen extends React.Component {
                 <Icon name="star" color={COLORS.primaryDark} size={24} />
                 <Icon name="star" color={COLORS.primaryDark} size={24} />
                 <Icon name="star" color={COLORS.primaryDark} size={24} />
+                <Icon name="star" color={COLORS.primaryDark} size={24} />
                 <Icon name="star-half" color={COLORS.primaryDark} size={24} />
-                <Icon name="star-border" color={COLORS.primaryDark} size={24} />
               </View>
             </View>
             <View
