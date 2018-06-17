@@ -28,6 +28,7 @@ export default class InputBox extends React.Component {
 
     return (
       <TextInput
+        underlineColorAndroid="#00000000"
         value={value}
         onChangeText={onChangeText}
         style={[

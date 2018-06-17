@@ -50,7 +50,7 @@ export default class ContractDetalScreen extends React.Component {
           <TouchableOpacity onPress={this.props.goBack}>
             <Icon name="chevron-left" color={COLORS.primaryDark} size={32} />
           </TouchableOpacity>
-          <Text style={{ fontWeight: "normal", fontSize: 24 }}>
+          <Text style={{ fontWeight: "bold", fontSize: 24 }}>
             Contract Detail
           </Text>
         </View>
@@ -58,7 +58,7 @@ export default class ContractDetalScreen extends React.Component {
           <View
             style={{
               borderRadius: 4,
-              shadowOpacity: 0.45,
+              shadowOpacity: 0.85,
               shadowRadius: 2,
               shadowColor: "#E0E0E0",
               padding: 16,

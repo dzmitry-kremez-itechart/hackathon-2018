@@ -45,7 +45,7 @@ class CreditCardScreen extends React.Component {
               <View
                 style={{
                   borderRadius: 4,
-                  shadowOpacity: 0.45,
+                  shadowOpacity: 0.85,
                   shadowRadius: 2,
                   paddingHorizontal: 10,
                   shadowColor: "#E0E0E0",
@@ -129,7 +129,7 @@ class CreditCardScreen extends React.Component {
           flexDirection: "row",
           alignItems: "center"
         }}>
-          <Text style={{ fontWeight: 'normal', fontSize: 24 }}>Credit cards</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 24 }}>Credit cards</Text>
         </View>
       {
         this.state.newCreditCardVisible ?

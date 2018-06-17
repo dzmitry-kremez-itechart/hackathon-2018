@@ -54,7 +54,15 @@ export function createUser(phoneNumber) {
 
     const responseJson = await response.json();
 
-    await AsyncStorage.setItem("TOKEN", responseJson.token);
+    console.log("BEFORE", responseJson);
+
+    try {
+      await AsyncStorage.setItem("TOKEN", responseJson.token);
+    } catch (error) {
+      console.log("ERRROR", error);
+    }
+
+    console.log("AFTER", responseJson);
 
     return dispatch(setToken(responseJson.token));
   };
@@ -106,7 +114,7 @@ export function createCreditCard(credit_card) {
 
     if (responseJson.credit_card) {
       return {
-        type: CREDIT_CARD_CREATED,
+        type: CREDIT_CARD_CREATED
       };
     } else {
       console.log(responseJson);
@@ -124,7 +132,7 @@ export function deleteCreditCard(id) {
         Accept: "application/json",
         Authorization: `bearer ${token}`,
         "Content-Type": "application/json"
-      },
+      }
     });
   };
 }

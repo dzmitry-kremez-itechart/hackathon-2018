@@ -1,11 +1,11 @@
-import * as React from 'react';
-import TextInputMask from 'react-native-text-input-mask';
+import * as React from "react";
+import TextInputMask from "react-native-text-input-mask";
 
 // constants
-import { COLORS } from '../../utils/constants';
+import { COLORS } from "../../utils/constants";
 
 // styles
-import { styles } from '../InputBox/styles';
+import { styles } from "../InputBox/styles";
 
 export default class InputMaskBox extends React.Component {
   static defaultProps = {
@@ -30,6 +30,7 @@ export default class InputMaskBox extends React.Component {
 
     return (
       <TextInputMask
+        underlineColorAndroid="#00000000"
         value={value}
         onChangeText={onChangeText}
         mask={mask}
@@ -37,7 +38,7 @@ export default class InputMaskBox extends React.Component {
           styles.input,
           {
             color: textColor,
-            borderColor: !disabled ? color : disabledColor,
+            borderColor: !disabled ? color : disabledColor
           }
         ]}
       />
