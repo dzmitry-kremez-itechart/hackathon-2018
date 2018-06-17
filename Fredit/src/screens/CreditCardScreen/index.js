@@ -72,10 +72,22 @@ export default class CreditCardScreen extends React.Component {
     return (
       <View style={{
         flex: 1,
-        paddingTop: 20
+        backgroundColor: "#F5F5F5"
       }}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 30, paddingBottom: 5, paddingLeft: 20 }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 24 }}>Credit Cards</Text>
+        <View style={{
+          zIndex: 5,
+          backgroundColor: "white",
+          shadowOpacity: 0.85,
+          shadowRadius: 2,
+          paddingHorizontal: 16,
+          shadowColor: "grey",
+          shadowOffset: { height: 0, width: 0 },
+          paddingTop: 32,
+          paddingBottom: 16,
+          flexDirection: "row",
+          alignItems: "center"
+        }}>
+          <Text style={{ fontWeight: 'normal', fontSize: 24 }}>Credit cards</Text>
         </View>
       {
         this.state.newCreditCardVisible ?

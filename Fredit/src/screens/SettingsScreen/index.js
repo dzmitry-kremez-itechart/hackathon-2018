@@ -8,7 +8,6 @@ export default class SettingsScreen extends React.Component {
 
   renderIdentitySection = () => (
     <SectionList
-      contentContainerStyle={{paddingTop: 20}}
       stickySectionHeadersEnabled={false}
       renderItem={({ item, index, section }) =>
         <TouchableOpacity
@@ -64,13 +63,13 @@ export default class SettingsScreen extends React.Component {
         </TouchableOpacity>
       }
       renderSectionHeader={({ section: { title } }) => (
-        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 30, paddingBottom: 5, paddingLeft: 20 }}>
-          <Text style={{ fontSize: 24, fontWeight: 'bold' }}>{title}</Text>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 10, paddingBottom: 5, paddingLeft: 20 }}>
+          <Text style={{ fontSize: 24 }}>{title}</Text>
         </View>
       )}
       sections={[
         {
-          title: 'General',
+          title: '',
           data: [
             { icon: SETTING_ITEMS.creditCard, text: 'Credit Cards', onPress: this.props.onCreditCardPress },
             { icon: 'account-box', text: 'Account' },
@@ -80,14 +79,14 @@ export default class SettingsScreen extends React.Component {
           ]
         },
         {
-          title: 'Support',
+          title: '',
           data: [
             { icon: 'help', text: 'Help center' },
             { icon: 'report-problem', text: 'Report a problem' },
           ]
         },
         {
-          title: 'Notifications',
+          title: '',
           data: [
             { icon: 'verified-user', text: 'Contract Approved', switch: true },
           ]
@@ -99,7 +98,24 @@ export default class SettingsScreen extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{
+        flex: 1,
+      }}>
+        <View style={{
+          zIndex: 5,
+          backgroundColor: "white",
+          shadowOpacity: 0.85,
+          shadowRadius: 2,
+          paddingHorizontal: 16,
+          shadowColor: "grey",
+          shadowOffset: { height: 0, width: 0 },
+          paddingTop: 32,
+          paddingBottom: 16,
+          flexDirection: "row",
+          alignItems: "center"
+        }}>
+          <Text style={{ fontWeight: 'normal', fontSize: 24 }}>Settings</Text>
+        </View>
         {this.renderIdentitySection()}
       </View>
     );
