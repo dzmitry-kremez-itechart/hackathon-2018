@@ -346,6 +346,7 @@ export default props => (
         }
       }
     `}
+    pollInterval={1000}
   >
     {({ loading, error, data }) => {
       console.log("DATA", data, loading, error);
