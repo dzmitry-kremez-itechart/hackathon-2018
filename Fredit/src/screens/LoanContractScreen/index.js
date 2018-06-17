@@ -364,6 +364,7 @@ export default props => (
           returnAmount
           timePeriod
           timePeriodType
+          description
         }
       }
     `}
