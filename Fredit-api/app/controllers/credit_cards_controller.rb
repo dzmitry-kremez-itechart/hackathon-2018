@@ -8,6 +8,16 @@ class CreditCardsController < ApplicationController
     end
   end
 
+  def destroy
+    @credit_card = current_user.credit_cards.find(params[:id])
+
+    if @credit_card.destroy
+      render json: { deleted: true }, status: :ok
+    else
+      render json: { errors: @credit_card.errors }, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def credit_card_params

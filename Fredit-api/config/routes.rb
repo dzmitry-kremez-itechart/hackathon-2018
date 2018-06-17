@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :credit_cards, only: :create
+  resources :credit_cards, only: [:create, :destroy]
+
   resources :loan_contracts, only: :create do
     member do
       post :accept

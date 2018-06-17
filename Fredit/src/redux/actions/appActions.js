@@ -113,3 +113,18 @@ export function createCreditCard(credit_card) {
     }
   };
 }
+
+export function deleteCreditCard(id) {
+  return async (dispatch, getState) => {
+    const token = await AsyncStorage.getItem("TOKEN");
+
+    const response = await fetch(`${URL}/credit_cards/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        Authorization: `bearer ${token}`,
+        "Content-Type": "application/json"
+      },
+    });
+  };
+}

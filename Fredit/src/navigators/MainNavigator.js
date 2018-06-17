@@ -1,7 +1,10 @@
 import * as React from "react";
 import { createBottomTabNavigator, Navigation } from "react-navigation";
 import Icon from "react-native-vector-icons/MaterialIcons";
-import { createCreditCard } from "../redux/actions/appActions";
+import {
+  createCreditCard,
+  deleteCreditCard
+} from "../redux/actions/appActions";
 import { connect } from "react-redux";
 
 // screens
@@ -64,9 +67,12 @@ export default createBottomTabNavigator(
         dispatch => ({
           onSubmitCreditCard: creditCard => {
             dispatch(createCreditCard(creditCard));
+          },
+          onDeleteCreditCard: id => {
+            dispatch(deleteCreditCard(id));
           }
         })
-      )(props => <CreditCardScreen {...props} creditCards={[]} />),
+      )(props => <CreditCardScreen {...props} />),
       navigationOptions: () => ({
         tabBarIcon: ({ focused }) => (
           <Icon
