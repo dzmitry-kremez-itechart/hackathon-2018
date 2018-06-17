@@ -27,7 +27,7 @@ class CreditCardScreen extends React.Component {
       this.props.onSubmitCreditCard(this.state.creditCard);
       this.setState({ newCreditCardVisible: false });
     }
-  }
+  };
 
   renderNewCreditCardForm = () =>
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center", margin: 20 }}>
@@ -119,7 +119,7 @@ class CreditCardScreen extends React.Component {
                     :
                     ''
                 }
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => this.props.onDeleteCreditCard(item.id)}>
                     <Icon
                       name="delete"
                       color={COLORS.primary}
@@ -168,10 +168,12 @@ class CreditCardScreen extends React.Component {
 
 export default (props) => (
   <Query
+    pollInterval={1000}
     query={gql`
       {
         user {
           creditCards {
+            id
             number
             expirationDate
             mainCard
