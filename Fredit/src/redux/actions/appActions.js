@@ -125,13 +125,6 @@ export function deleteCreditCard(id) {
         Authorization: `bearer ${token}`,
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        credit_card
-      })
     });
-
-    const responseJson = await response.json();
-
-    console.log(responseJson);
   };
 }

@@ -119,13 +119,18 @@ class CreditCardScreen extends React.Component {
                     :
                     ''
                 }
-                  <TouchableOpacity onPress={() => this.props.onDeleteCreditCard(item.id)}>
-                    <Icon
-                      name="delete"
-                      color={COLORS.primary}
-                      size={24}
-                    />
-                  </TouchableOpacity>
+                {
+                    item.mainCard ?
+                    ''
+                    :
+                    <TouchableOpacity onPress={() => this.props.onDeleteCreditCard(item.id)}>
+                      <Icon
+                        name="delete"
+                        color={COLORS.primary}
+                        size={24}
+                      />
+                    </TouchableOpacity>
+                }
                 </View>
               </View>
             );
