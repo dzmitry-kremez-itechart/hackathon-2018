@@ -29,6 +29,7 @@ class LoanContractsController < ApplicationController
       :time_period_type,
       :issued_amount,
       :return_amount,
+      :description
     )
   end
 end
