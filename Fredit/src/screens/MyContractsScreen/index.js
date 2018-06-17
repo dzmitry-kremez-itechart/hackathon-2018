@@ -1,4 +1,5 @@
 import * as React from 'react';
+import moment from 'moment';
 import {
   Text,
   View,
@@ -18,6 +19,14 @@ const requestStatusColors = {
   'issued': '#F44336',
   'accepted': '#4CAF50'
 }
+
+const stateColors = {
+  'failed': '#F44336',
+  'pending': '#FFC107',
+  'active': '#CDDC39',
+  'completed': '#4CAF50'
+}
+
 
 class LoanContractScreen extends React.Component {
   state = {
@@ -175,10 +184,7 @@ class LoanContractScreen extends React.Component {
                 renderItem={({ item }) => {
                   const returnAmount = (item.returnAmount / 100).toFixed(2);
                   const issuedAmount = (item.issuedAmount / 100).toFixed(2);
-                  const percent = (
-                    ((returnAmount - issuedAmount) / issuedAmount) *
-                    100
-                  ).toFixed(0);
+                  const expirationDate = moment(item.startDate).add(item.timePeriod).format('DD/MM/YY');
 
                   return (
                     <View
@@ -192,16 +198,17 @@ class LoanContractScreen extends React.Component {
                         height: 56,
                         flexDirection: 'row',
                         alignItems: 'center',
-                        backgroundColor: COLORS.background
+                        backgroundColor: COLORS.background,
+                        padding: 10
                       }}
                     >
                       <View style={{ flex: 1 }}>
                         <Text>{`In: ${issuedAmount} $`}</Text>
                         <Text>{`Out: ${returnAmount} $`}</Text>
                       </View>
-                      <Text
-                        style={{ marginRight: 16, fontSize: 28 }}
-                      >{`${percent} %`}</Text>
+                      <Text style={{ marginRight: 16, fontSize: 16, color: stateColors[item.state] }}>
+                        {`${item.state}`}
+                      </Text>
                       <View
                         style={{
                           height: 56,
@@ -216,8 +223,7 @@ class LoanContractScreen extends React.Component {
                           alignItems: 'center'
                         }}
                       >
-                        <Text style={{ fontSize: 28 }}>{item.timePeriod}</Text>
-                        <Text>days</Text>
+                        <Text style={{ fontSize: 14 }}>Exp: {expirationDate}</Text>
                       </View>
                     </View>
                   );
@@ -251,6 +257,7 @@ export default () => (
             timePeriodType
             startDate
             requestStatus
+            state
           }
         }
       }
